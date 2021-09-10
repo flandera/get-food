@@ -26,7 +26,6 @@ class TestPubProviderTest extends KernelTestCase
 
     public function testGetPub(): void
     {
-        dump($this->provider->getPub(1));
         $this->assertTrue(is_array($this->provider->getPub(1)));
         $this->assertSame(5, count($this->provider->getPub(1)));
         $this->assertSame('Bufet Černý kohout',$this->provider->getPub(1)['name']);

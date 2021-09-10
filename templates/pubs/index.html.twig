@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vítejte na GetFood!{% endblock %}
+
+{% block body %}
+    <div class="col-lg-8 mx-auto p-3 py-md-5">
+        <h1>Vítejte na GetFood!</h1>
+
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                {% if type == 'error' %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ message }}
+                    </div>
+
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+        {% for pub in pubs %}
+            <div class="card-body">
+                <a href="pub/{{ pub.id }}"><span class="card-title">{{ pub.name }}</span></a>
+                <span class="card-text">{{ pub.address }}</span>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

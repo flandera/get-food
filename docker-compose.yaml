@@ -1,0 +1,13 @@
+version: '3.6'
+services:
+  foods:
+    image: webdevops/php-apache-dev:8.0
+    working_dir: /var/www
+    environment: ['WEB_DOCUMENT_ROOT=/var/www/public', 'DOCUMENT_ROOT=/var/www/public/', 'WEB_DOCUMENT_INDEX=/var/www/public/index.php', 'PHP_IDE_CONFIG=serverName=foods', 'PHP_DEBUGGER=xdebug', 'XDEBUG_REMOTE_AUTOSTART=1', 'XDEBUG_REMOTE_ENABLE=1', 'XDEBUG_REMOTE_CONNECT_BACK=0', 'XDEBUG_REMOTE_HOST=192.168.1.129', 'XDEBUG_REMOTE_PORT=9000', 'XDEBUG_IDEKEY=PHPSTORM', 'XDEBUG_MODE=debug', 'XDEBUG_START_WITH_REQUEST=yes','XDEBUG_CLIENT_HOST=host.docker.internal', 'PM_MAX_REQUESTS=500', 'PHP_MEMORY_LIMIT=2G']
+    container_name: foods
+    shm_size: 2g
+    volumes:
+      - .:/var/www/:rw
+    ports:
+      - '8085:80'
+

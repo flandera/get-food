@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vítejte na GetFood!{% endblock %}
+
+{% block body %}
+   <div class="col-lg-8 mx-auto p-3 py-md-5">
+        {% if pub is not empty %}
+            <h1>Menu pro {{ pub.name }}</h1>
+        {% endif %}
+
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                {% if type == 'error' %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ message }}
+                    </div>
+
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+        {% if menu is not empty%}
+            {% for date in menu %}
+                <div class="menu">
+                    {% for key, courses in date %}
+                        {% if key == 'date' %}
+                            <h2>Datum: {{ courses }}</h2>
+                        {% elseif key == 'courses' %}
+                            {% for course in courses %}
+                                    <h3>{{ course.course }}</h3>
+                                {% for meals in course.meals %}
+                                    <div>
+                                        <span>{{ meals.name }}</span>
+                                        <span>{{  meals.price }} Kč</span>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% elseif key == 'note' %}
+                            <p>{{ date.note }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
